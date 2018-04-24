@@ -1,4 +1,4 @@
-# dataextention demo
+# relation-tree demo
 
 > A relation-tree ui demo.
 
