@@ -1,0 +1,62 @@
+@import "../themes/var";
+
+.gs-layout {
+  background-color: $body-background;
+
+  &.is-fixed {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+
+    .gs-layout {
+      &-header {
+        position: absolute;
+        z-index: $header-zIndex;
+        width: 100%;
+      }
+
+      &-inner {
+        height: 100%;
+        padding-top: $header-height;
+      }
+
+      &-content {
+        overflow: auto;
+      }
+    }
+  }
+
+  &-header {
+    height: $header-height;
+  }
+
+  &-inner {
+    display: flex;
+  }
+
+  &-sidebar {
+    padding-top: $gap-size-md;
+    padding-bottom: $gap-size-md;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #fff;
+    box-shadow: $layout-sidebar-shadown;
+    transition: width .3s;
+
+    &.is-collapsed {
+      .gs-menu {
+        transform: translate3d(-100%, 0, 0);
+        transition: transform .3s;
+      }
+    }
+  }
+
+  &-content {
+    flex: 1;
+    padding: $gap-size-md;
+  }
+
+  // &-footer {
+
+  // }
+}
