@@ -28,6 +28,10 @@ const mutations = {
     /**
      * payload:{dimName:name}
      * */
+  },
+
+  addFather(state, payload) {
+
   }
 
 };

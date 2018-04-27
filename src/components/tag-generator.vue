@@ -2,16 +2,16 @@
   <div class="tab-box">
     <div style="margin-bottom: 20px;">
       <el-input v-model="dimInputValue" clearable placeholder="Enter Dimention Name" @keyup.enter.native="addDim(dimInputValue)">
-          <el-button
-                  size="small"
-                  @click="addDim(dimInputValue)"
-                  slot="append" icon="el-icon-circle-plus-outline"
-          >
-              New Dimention
-          </el-button>
+        <el-button
+          size="small"
+          @click="addDim(dimInputValue)"
+          slot="append" icon="el-icon-circle-plus-outline"
+        >
+          New Dimention
+        </el-button>
       </el-input>
     </div>
-    <el-tabs v-model="editableTabsValue" type="border-card" closable @tab-remove="removeDim">
+    <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeDim">
       <el-tab-pane
         :key="index"
         v-for="(dim, index) in tag"

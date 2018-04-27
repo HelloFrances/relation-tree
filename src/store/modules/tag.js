@@ -4,18 +4,47 @@
 
 // initial state
 const state = {
-  tagList: []
+  /**
+   * tagList:[{dimName:'',values:['','',...]},{...}]
+   * */
+  tagList: [],
+  tagList_handle: []
 };
 
 const actions = {
 
-  getTagList({commit}) {
+  getImportTagList({commit}) {
     //todo import taglist
   },
 
 };
 
 const mutations = {
+  /**
+   * 获取原始格式的tagList
+   * */
+  getOriginTagList(state) {
+    //return state.tagList;
+  },
+
+  /**
+   * 处理成的格式为tagList:[{dimName:'',value:''},{...}]
+   * */
+  getTaglist(state) {
+    let _tagList = [];
+    state.tagList.forEach(item, index => {
+      if(item.values.length) {
+        item.values.forEach(i,id => {
+          let _obj = {
+            dimName: item.dimName,
+            value: i
+          };
+          _tagList.push(_obj);
+        })
+      }
+    });
+    state.tagList_handle  = [..._tagList];
+  },
 
   addTag(state, payload) {
     /**

@@ -1,6 +1,6 @@
-# relation-tree demo
+# dataextention
 
-> A relation-tree ui demo.
+> A gs-ui template project
 
 ### 项目结构
 ```Javascript
@@ -31,7 +31,6 @@
   - `vuex` Vue.js应用程序开发的状态管理模式
 - `mikaisa` 构建工具，[使用说明](https://gitlab.gridsum.com/frontend/gs-ui/mikaisa)
 - `gs-ui` 基于Vue.js的UI组件库
-- `element-ui` 饿了么的UI组件库
 
 
 ## Build Setup
