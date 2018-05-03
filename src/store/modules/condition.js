@@ -17,16 +17,29 @@ const actions = {
 
 const mutations = {
 
-  addCondition(state, payload) {
-    /**
-     * payload:{dimName:name,values:[value1,value2,...]}
-     * */
-    state.conditionList.push(payload);
+  /**
+   * 新增一个空的condition
+   * **/
+  addCondition(state) {
+    let _condition = {
+      dims:[],//dim:{dim:'',value:''}
+      condition:{}
+    };
+    state.conditionList.push(_condition);
+  },
+
+  /**
+   * 根据条件id更新一个条件
+   * @payload:{conditionId:index,condition:{dims:[{dim:'',value:''},{...}],condition:{}}}
+   * */
+  updateConditionById(state, payload) {
+    debugger
+    state.conditionList[payload.conditionId] = payload.condition;
   },
 
   removeCondition(state, payload) {
     /**
-     * payload:{dimName:name}
+     * @payload:{dimName:name}
      * */
   },
 

@@ -1,22 +1,24 @@
 <template>
   <div>
     <div :class="background" class="wrap">
-      <p class="logic">{{ label }}</p>
-      <div>{{type ? `${type} : ` : ''}}{{word}}</div>
-      <div  v-if="!nodes" style="margin-top: 15px;">
-        <el-input clearable placeholder="输入关键词，多个词用顿号隔开" v-model="options.words" class="input-with-select">
-          <el-select  v-model="type" slot="prepend" placeholder="选择匹配规则">
+      <p class="logic">{{ condition_handle.label }}</p>
+      <div>{{condition_handle.type ? `${condition_handle.type} : ${words_handle}` : ''}}</div>
+      <div  v-if="!condition_handle.nodes" style="margin-top: 15px;">
+        <el-input clearable placeholder="输入关键词，多个词用顿号隔开" v-model="words_handle" class="input-with-select">
+          <el-select  v-model="condition_handle.type" slot="prepend" placeholder="选择匹配规则">
             <el-option
               v-for="item,index in typeList"
               :key="index"
               :label="item.desc"
-              :value="item.value">
+              :value="item.value"
+              :disabled="item.disable"
+            >
             </el-option>
           </el-select>
-          <!--<el-button slot="append" icon="el-icon-search"></el-button>-->
+          <el-button slot="append" icon="el-icon-check" v-on:@click="confirm"></el-button>
         </el-input>
       </div>
-      <condition-generator v-for="node in nodes" :nodes="node.nodes" :label="node.label" :type="node.type" :options="node.options" :depth="depth + 1"></condition-generator>
+      <condition-generator v-for="node,index in condition_handle.nodes" :condition="node" :depth="depth + 1" :key="index"></condition-generator>
     </div>
   </div>
 </template>
@@ -63,26 +65,17 @@
   import Config from '../config';
   export default {
     name: "condition-generator",
-    props: [ 'label', 'nodes','type','options', 'depth' ],
+    props: [ 'condition', 'depth','conditionId' ],
     data() {
       return {
-        currentCondition: {
-          type: '',
-          options: {
-            words: ''
-          }
-        },
         typeList: Config.condition.type,
-        condition: {}
+        words_handle: '',
+        condition_handle: {}
       }
     },
     computed: {
       indent() {
         return { transform: `translate(${this.depth * 50}px)` }
-      },
-      word() {
-        let words =  this.options ? this.options.words : [];
-        return words.join('、');
       },
       background() {
         let background = {'white': true};
@@ -98,6 +91,38 @@
             break;
         }
         return background;
+      }
+    },
+    methods: {
+      ...mapMutations('condition', [
+        'addCondition','removeCondition','updateConditionById'
+      ]),
+      arrayToString(arr) {
+        return arr.join(',');
+      },
+      confirm() {
+        let _obj = {
+          type: this.condition_handle.type,
+          options: {
+            words:this.words_handle.replace(/，/g,',').split(',')
+          }
+        };
+        debugger
+        this.$emit('updateCondition', _obj);
+      }
+    },
+    mounted: function () {
+      /**
+       * 替换成watch
+       * **/
+      if(!this.condition.dims.length) {
+        console.log('进来啦'+this.condition.condition);
+        this.condition_handle = { label: '', type: 'keyword', options: {words:[]}, id:'1222'};
+        this.words_handle = '';
+      }
+      else {
+        this.condition_handle = this.condition;
+        this.words_handle = this.arrayToString(this.condition.options.words);
       }
     }
   }

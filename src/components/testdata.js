@@ -13,7 +13,7 @@ var condition = {
     {
       "id": "sdad11111",
       "pid": "sdad",
-      "type": "keyword",
+      "type": "nearmatch",
       "options": {
         "words": [
           "稻佐山1","佐稻山11"

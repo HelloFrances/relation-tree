@@ -20,6 +20,7 @@ const actions = {
 };
 
 const mutations = {
+
   /**
    * 获取原始格式的tagList
    * */
@@ -46,10 +47,11 @@ const mutations = {
     state.tagList_handle  = [..._tagList];
   },
 
+  /**
+   * 新增一个tag
+   * @payload:{dimName:name,values:[value1,value2,...]}
+   * */
   addTag(state, payload) {
-    /**
-     * payload:{dimName:name,values:[value1,value2,...]}
-     * */
     let _tagList = state.tagList;
     let _same = _tagList.filter(t => {
       return t.dimName == payload.dimName;
@@ -57,10 +59,11 @@ const mutations = {
     if(!_same.length) _tagList.push(payload);
   },
 
+  /**
+   * 移除一个tag
+   * @payload:{dimName:name}
+   * */
   removeTag(state, payload) {
-    /**
-     * payload:{dimName:name}
-     * */
     let _tagList = state.tagList.filter(function (item) {
       return item.dimName != payload.dimName;
     });
@@ -68,10 +71,11 @@ const mutations = {
     console.log(state.tagList);
   },
 
+  /**
+   * 根据dimId新增value
+   * @payload:{dimName:name,index:index,value:value}
+   * */
   addValueByDimId(state, payload) {
-    /**
-     * payload:{dimName:name,index:index,value:value}
-     * */
     let _values = state.tagList[payload.index].values;
     let _same = _values.filter(v => {
       return v == payload.value;
@@ -79,11 +83,11 @@ const mutations = {
     if(!_same.length) _values.push(payload.value);
   },
 
-
+  /**
+   * 根据dimId移除value
+   * @payload:{dimName:name,index:index,valueId:valueId}
+   * */
   removeValueByDimId(state, payload) {
-    /**
-     * payload:{dimName:name,index:index,valueId:valueId}
-     * */
     let values = state.tagList[payload.index].values;
     values.splice(payload.valueId,1);
   }
