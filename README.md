@@ -1,6 +1,6 @@
-# dataextention
+# relation-tree
 
-> A gs-ui template project
+> A relation-tree template project
 
 ### 项目结构
 ```Javascript
@@ -29,9 +29,6 @@
 - `Vue.js` 轻量级的MVVM框架
   - `vue-router` 前端路由
   - `vuex` Vue.js应用程序开发的状态管理模式
-- `mikaisa` 构建工具，[使用说明](https://gitlab.gridsum.com/frontend/gs-ui/mikaisa)
-- `gs-ui` 基于Vue.js的UI组件库
-
 
 ## Build Setup
 

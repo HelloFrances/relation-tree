@@ -1,7 +1,7 @@
 {
-  "name": "dataextention",
+  "name": "relation-tree",
   "version": "1.0.0",
-  "description": "A gs-ui template project",
+  "description": "A relation-tree template project",
   "author": "Frances",
   "scripts": {
     "postinstall": "npm run lint",
@@ -15,7 +15,6 @@
   "dependencies": {
     "axios": "^0.17.1",
     "element-ui": "^2.3.4",
-    "gs-ui": "http://gs-ui.gridsum.com/lib/gs-ui-1.0.0-rc7.tgz",
     "keymirror": "^0.1.1",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
@@ -30,8 +29,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-vue": "^4.0.0",
-    "mikaisa": "http://gs-ui.gridsum.com/mikaisa/mikaisa-1.0.0.tgz"
+    "eslint-plugin-vue": "^4.0.0"
   },
   "engines": {
     "node": ">= 6.0.0",
