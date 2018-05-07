@@ -21,6 +21,6 @@ new Vue({
     App
   },
   render() {
-    return '<App />';
+    return <App />;
   }
 });

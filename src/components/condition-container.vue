@@ -1,12 +1,17 @@
 <template>
   <div>
     <div class="tag-selector">
-      <el-cascader placeholder="Try Typing" :options="tagList_handle" v-model="selectedTags" filterable></el-cascader>
-      <span class="demonstration">{{selectedTags}}</span>
+      <span class="demonstration">选择标签 </span>
+      <el-cascader placeholder="Try Typing" :options="tagList_handle" v-model="selectedTags" filterable size="small"></el-cascader>
     </div>
-    <condition-generator :condition="condition" :conditionId="conditionId" :depth="0" v-on:updateCondition="handleUpdateCondition"></condition-generator>
+    <condition-generator :condition="condition.condition" :conditionId="conditionId" :depth="0"></condition-generator>
   </div>
 </template>
+<style>
+  .tag-selector {
+    margin-bottom: 10px;
+  }
+</style>
 
 <script>
   import {
@@ -15,6 +20,7 @@
   } from 'vuex';
   import ConditionGenerator from '../components/condition-generator';
   import conditionTest from '../components/testdata';
+
   export default {
     name: "condition-container",
     props: ['condition','conditionId'],
@@ -55,18 +61,21 @@
     },
     methods: {
       ...mapMutations('condition', [
-        'updateConditionById'
-      ]),
-
-      handleUpdateCondition(_obj) {
-        let dims = [{dim:this.selectedLabel[0],value:this.selectedLabel[1]}];
-        debugger
-        this.updateConditionById({
+        'updateDims'
+      ])
+    },
+    watch: {
+//       'condition.condition': {
+//         handler: function(newC, oldC) {
+//
+//         },
+//         deep: true
+//       },
+      selectedTags: function (newS,oldS) {
+        let dims = [{dim:newS[0],value:newS[1]}];
+        this.updateDims({
           conditionId: this.conditionId,
-          condition: {
-            dims: dims,
-            condition: _obj
-          }
+          dims: dims
         });
       }
     }

@@ -6,7 +6,7 @@ var condition1 = {
     ]
   }
 };
-var condition = {
+var condition2 = {
   "id": "sdad",
   "label": "and",
   "nodes": [
@@ -66,4 +66,41 @@ var condition = {
     }
   ]
 }
+function update(target,selfId,result) {
+  if(target.id === selfId) {
+    target.type = result.type;
+    target.options = result.options;
+  }
+  else if(target.nodes) {
+    target.nodes.forEach(item => {
+      update(item,selfId,result);
+    });
+  }
+}
+
+function addFather(target,selfId,logic) {
+  if(target.id == selfId) {
+    let _target = [...target],_parent = {label:logic,nodes:[]},_selfId = 'suijishengchengdeid';
+    if(target.parentId) _parent.parentId = target.parentId;
+    _parent.id = _selfId;
+    _target.parentId = _selfId;
+    _parent.nodes.push(_target);
+  }
+  else if(target.nodes) {
+    target.nodes.forEach(item => {
+      addFather(item,selfId,logic);
+    });
+  }
+}
+
+function addBrother() {
+
+}
+
+var condition = {
+  condition: condition2,
+  func: update
+}
+
+
 export default condition;

@@ -1,11 +1,11 @@
 <template>
   <div class="tab-box">
     <div style="margin-bottom: 20px;">
-      <el-input v-model="dimInputValue" clearable placeholder="Enter Dimention Name" @keyup.enter.native="addDim(dimInputValue)">
+      <el-input v-model="dimInputValue" clearable placeholder="请输入维度名称" @keyup.enter.native="addDim(dimInputValue)">
         <el-button
           size="small"
           @click="addDim(dimInputValue)"
-          slot="append" icon="el-icon-circle-plus-outline"
+          slot="append" icon="el-icon-plus"
         >
           New Dimention
         </el-button>
@@ -37,7 +37,7 @@
             ref="saveTagInput"
           >
           </el-input>
-          <el-button v-show="!tagInputVisible" class="button-new-tag" size="small" @click="showTagInput(index)" icon="el-icon-circle-plus-outline">New Tag</el-button>
+          <el-button v-show="!tagInputVisible" class="button-new-tag" size="small" @click="showTagInput(index)" icon="el-icon-plus">New Tag</el-button>
         </div>
       </el-tab-pane>
     </el-tabs>
