@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import SideNav from '../components/side-nav';
+import SideNav from '../components/side-nav'
 
 export default {
-  data() {
+  data () {
     return {
       navsData: [ // 导航数据
         {
@@ -47,21 +47,21 @@ export default {
         }
       ],
       isFixed: true
-    };
+    }
   },
   components: {
     SideNav
   },
   methods: {
-    handleSelect(index) { // 导航选中事件
-      console.log(index);
+    handleSelect (index) { // 导航选中事件
+      console.log(index)
     },
-    handleOpen(index) { // 导航展开事件
-      console.log(index);
+    handleOpen (index) { // 导航展开事件
+      console.log(index)
     },
-    handleClose(index) { // 导航收起事件
-      console.log(index);
+    handleClose (index) { // 导航收起事件
+      console.log(index)
     }
   }
-};
+}
 </script>

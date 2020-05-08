@@ -88,28 +88,28 @@
   </gs-menu>
 </template>
 <script>
-  export default {
-    props: {
-      data: Array
-    },
-    data() {
-      return {};
-    },
-    computed: {
-      active() {
-        return this.$route.path;
-      }
-    },
-    methods: {
-      handleSelect(index) { // 导航选中事件
-        this.$emit('select', index);
-      },
-      handleOpen(index) { // 导航展开事件
-        this.$emit('open', index);
-      },
-      handleClose(index) { // 导航收起事件
-        this.$emit('close', index);
-      }
+export default {
+  props: {
+    data: Array
+  },
+  data () {
+    return {}
+  },
+  computed: {
+    active () {
+      return this.$route.path
     }
-  };
+  },
+  methods: {
+    handleSelect (index) { // 导航选中事件
+      this.$emit('select', index)
+    },
+    handleOpen (index) { // 导航展开事件
+      this.$emit('open', index)
+    },
+    handleClose (index) { // 导航收起事件
+      this.$emit('close', index)
+    }
+  }
+}
 </script>

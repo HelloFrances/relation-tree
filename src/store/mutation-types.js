@@ -1,4 +1,4 @@
-import keyMirror from 'keymirror';
+import keyMirror from 'keymirror'
 
 export default keyMirror({
   GREET: null,
@@ -7,4 +7,4 @@ export default keyMirror({
   Tag: null,
   Tag_SUCCESS: null,
   Tag_FAILURE: null
-});
+})

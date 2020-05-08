@@ -74,74 +74,74 @@
 </style>
 
 <script>
-  import {
-    mapState,
-    mapMutations
-  } from 'vuex';
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
 
-  export default {
-    name: "tag-generator",
-    data() {
-      return {
-        dimInputValue:'',
-        editableTabsValue: '',
-        tagInputVisible: false,
-        tagInputValue: ''
-      }
+export default {
+  name: 'tag-generator',
+  data () {
+    return {
+      dimInputValue: '',
+      editableTabsValue: '',
+      tagInputVisible: false,
+      tagInputValue: ''
+    }
+  },
+  methods: {
+    addDim (dimName) {
+      if (!dimName) return
+      this.addTag({
+        dimName: dimName,
+        values: []
+      })
+      this.editableTabsValue = dimName
+      this.dimInputValue = ''
     },
-    methods: {
-      addDim(dimName) {
-        if (!dimName) return;
-        this.addTag({
-          dimName: dimName,
-          values: []
-        });
-        this.editableTabsValue = dimName;
-        this.dimInputValue = '';
-      },
 
-      removeDim(targetName) {
-        let activeName = this.editableTabsValue;
-        this.removeTag({dimName:targetName});
-        if(activeName === targetName) this.editableTabsValue = this.tag[this.tag.length - 1].dimName;
-      },
+    removeDim (targetName) {
+      const activeName = this.editableTabsValue
+      this.removeTag({ dimName: targetName })
+      if (activeName === targetName) this.editableTabsValue = this.tag[this.tag.length - 1].dimName
+    },
 
-      removeValue(dimName,index,valueId) {
-        this.removeValueByDimId({
+    removeValue (dimName, index, valueId) {
+      this.removeValueByDimId({
+        dimName: dimName,
+        index: index,
+        valueId: valueId
+      })
+    },
+
+    showTagInput (index) {
+      this.tagInputVisible = true
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput[index].$refs.input.focus()
+      })
+    },
+
+    addValue (dimName, index) {
+      const tagInputValue = this.tagInputValue
+      if (tagInputValue) {
+        this.addValueByDimId({
           dimName: dimName,
           index: index,
-          valueId: valueId
-        });
-      },
-
-      showTagInput(index) {
-        this.tagInputVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput[index].$refs.input.focus();
-        });
-      },
-
-      addValue(dimName,index) {
-        let tagInputValue = this.tagInputValue;
-        if (tagInputValue) {
-          this.addValueByDimId({
-            dimName: dimName,
-            index: index,
-            value: tagInputValue
-          });
-        }
-        this.tagInputVisible = false;
-        this.tagInputValue = '';
-      },
-
-      ...mapMutations('tag', [
-        'addTag','removeTag','addValueByDimId','removeValueByDimId'
-      ])
+          value: tagInputValue
+        })
+      }
+      this.tagInputVisible = false
+      this.tagInputValue = ''
     },
-    computed: {
-      ...mapState('tag', {
-        tag: 'tagList'
-      })
-    }
+
+    ...mapMutations('tag', [
+      'addTag', 'removeTag', 'addValueByDimId', 'removeValueByDimId'
+    ])
+  },
+  computed: {
+    ...mapState('tag', {
+      tag: 'tagList'
+    })
   }
+}
 </script>

@@ -1,5 +1,5 @@
-import Home from '../views/Home';
-import Demo2 from '../views/Demo2';
+import Home from '../views/Home'
+import Demo2 from '../views/Demo2'
 
 const routes = [
   {
@@ -12,8 +12,8 @@ const routes = [
     name: 'Demo2',
     component: Demo2
   }
-];
+]
 
 export default {
   routes
-};
+}

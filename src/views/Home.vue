@@ -67,53 +67,53 @@
 </style>
 
 <script>
-  import {
-    mapState,
-    mapMutations
-  } from 'vuex';
-  import TagGenerator from '../components/tag-generator';
-  import ConditionContainer from '../components/condition-container';
-  import ElContainer from "../../node_modules/element-ui/packages/container/src/main.vue";
-  import ElMain from "../../node_modules/element-ui/packages/main/src/main.vue";
-  import ElAside from "../../node_modules/element-ui/packages/aside/src/main.vue";
-  //import condition from '../components/testdata';
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
+import TagGenerator from '../components/tag-generator'
+import ConditionContainer from '../components/condition-container'
+import ElContainer from '../../node_modules/element-ui/packages/container/src/main.vue'
+import ElMain from '../../node_modules/element-ui/packages/main/src/main.vue'
+import ElAside from '../../node_modules/element-ui/packages/aside/src/main.vue'
+// import condition from '../components/testdata';
 
-  export default {
-    name: 'Demo',
-    data() {
-      return {
-        isFixed: true,
-        tags: [],
-        activeName: '1',
-        showResultList: false
-      };
-    },
-    components: {
-      ElAside,
-      ElMain,
-      ElContainer,
-      TagGenerator,
-      ConditionContainer
-    },
-    computed: {
-      ...mapState('tag', {
-        tag: 'tagList'
-      }),
-
-      ...mapState('condition', {
-        condition: 'conditionList',
-        result: 'resultList'
-      })
-    },
-    methods: {
-      ...mapMutations('condition', [
-        'addCondition','removeCondition','generateResultList'
-      ]),
-
-      generate: function () {
-        this.showResultList = !this.showResultList;
-        if(this.showResultList) this.generateResultList();
-      }
+export default {
+  name: 'Demo',
+  data () {
+    return {
+      isFixed: true,
+      tags: [],
+      activeName: '1',
+      showResultList: false
     }
-  };
+  },
+  components: {
+    ElAside,
+    ElMain,
+    ElContainer,
+    TagGenerator,
+    ConditionContainer
+  },
+  computed: {
+    ...mapState('tag', {
+      tag: 'tagList'
+    }),
+
+    ...mapState('condition', {
+      condition: 'conditionList',
+      result: 'resultList'
+    })
+  },
+  methods: {
+    ...mapMutations('condition', [
+      'addCondition', 'removeCondition', 'generateResultList'
+    ]),
+
+    generate: function () {
+      this.showResultList = !this.showResultList
+      if (this.showResultList) this.generateResultList()
+    }
+  }
+}
 </script>

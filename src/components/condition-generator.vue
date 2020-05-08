@@ -83,156 +83,157 @@
 </style>
 
 <script>
-  import {
-    mapState,
-    mapMutations
-  } from 'vuex';
-  import Config from '../config';
-  import ElRow from "element-ui/packages/row/src/row";
-  import ElCard from "../../node_modules/element-ui/packages/card/src/main.vue";
+import {
+  mapState,
+  mapMutations
+} from 'vuex'
+import Config from '../config'
+import ElRow from 'element-ui/packages/row/src/row'
+import ElCard from '../../node_modules/element-ui/packages/card/src/main.vue'
 
-  export default {
-    components: {
-      ElCard,
-      ElRow},
-    name: "condition-generator",
-    props: [ 'condition', 'depth','conditionId' ],
-    data() {
-      return {
-        // selfId: '',
-        // parentId: '',
-        typeList: Config.condition.type,
-        logic: Config.logic,
-        words_handle: '',
-        condition_handle: {}
-      }
-    },
-    computed: {
-      selfId() {
-        return this.condition.id;
-      },
-      parentId() {
-        return this.condition.parentId ? this.condition.parentId : '';
-      },
-      indent() {
-        return { transform: `translate(${this.depth * 50}px)` }
-      },
-      background() {
-        let background = {'white': true};
-        switch (this['condition_handle'].label) {
-          case 'and':
-            background = {'pink': true};
-            break;
-          case 'or':
-            background = {'green': true};
-            break;
-          case 'not':
-            background = {'yellow': true};
-            break;
-        }
-        return background;
-      }
-    },
-    methods: {
-      ...mapMutations('condition', [
-        'addFatherById','addBrotherById','updateById','removeById'
-      ]),
-      arrayToString(arr) {
-//        if(toString.call(arr) != '[object array]') return '';
-        return arr.join(',');
-      },
-
-      randomId(n) {
-        let res = "";
-        for(let i = 0; i < n ; i ++) {
-          let id = Math.ceil(Math.random()*35);
-          res += Config.randomChars[id];
-        }
-        return res;
-      },
-      confirm() {
-        let _obj = {
-          selfId: this.selfId,
-          type: this.condition_handle.type,
-          options: {
-            words:this.words_handle.replace(/，/g,',').split(',')
-          },
-          conditionId: this.conditionId
-        };
-        this.updateById(_obj);
-        //this.$emit('updateCondition', _obj);
-      },
-      addFather(logic) {
-        let _obj = {
-          conditionId: this.conditionId,
-          logic: logic,
-          selfId: this.selfId
-        }
-        this.addFatherById(_obj);
-      },
-      addBrother() {
-        let _obj = {
-          conditionId: this.conditionId,
-          selfId: this.selfId
-        }
-        this.addBrotherById(_obj);
-      },
-      removeNode() {
-        let _obj = {
-          selfId: this.selfId,
-          parentId: this.parentId,
-          conditionId: this.conditionId
-        };
-        this.removeById(_obj);
-      }
-    },
-    mounted: function () {
-
-    },
-    watch: {
-//      'condition_handle': {
-//        handler: function(newC, oldC) {
-//          debugger
-//          this.words_handle = newC.options? this.arrayToString(newC.options.words): '';
-//        },
-//        deep: true
-//      },
-      'condition': {
-        handler: function(newC, oldC) {
-          for(let i in this.condition_handle) {
-            delete this.condition_handle[i];
-          }
-          for(let ii in newC) {
-            this.$set(this.condition_handle,ii,newC[ii]);
-          }
-          //this.$set(this,'words_handle',newC.options? this.arrayToString(newC.options.words): '');
-          this.words_handle = this.condition_handle.options? this.arrayToString(this.condition_handle.options.words): '';
-          //this.$forceUpdate();
-          debugger
-        },
-        deep: true
-      },
-//      'condition.options': {
-//        handler: function(newC, oldC) {
-//          debugger
-//          console.log(newC);
-//        },
-//        deep: true
-//      },
-//      'condition.id': {
-//        handler: function(newC, oldC) {
-//          debugger
-//          console.log(newC);
-//        },
-//        deep: true
-//      },
-//      'condition.parentId': {
-//        handler: function(newC, oldC) {
-//          debugger
-//          console.log(newC);
-//        },
-//        deep: true
-//      }
+export default {
+  components: {
+    ElCard,
+    ElRow
+  },
+  name: 'condition-generator',
+  props: ['condition', 'depth', 'conditionId'],
+  data () {
+    return {
+      // selfId: '',
+      // parentId: '',
+      typeList: Config.condition.type,
+      logic: Config.logic,
+      words_handle: '',
+      condition_handle: {}
     }
+  },
+  computed: {
+    selfId () {
+      return this.condition.id
+    },
+    parentId () {
+      return this.condition.parentId ? this.condition.parentId : ''
+    },
+    indent () {
+      return { transform: `translate(${this.depth * 50}px)` }
+    },
+    background () {
+      let background = { white: true }
+      switch (this.condition_handle.label) {
+        case 'and':
+          background = { pink: true }
+          break
+        case 'or':
+          background = { green: true }
+          break
+        case 'not':
+          background = { yellow: true }
+          break
+      }
+      return background
+    }
+  },
+  methods: {
+    ...mapMutations('condition', [
+      'addFatherById', 'addBrotherById', 'updateById', 'removeById'
+    ]),
+    arrayToString (arr) {
+      //        if(toString.call(arr) != '[object array]') return '';
+      return arr.join(',')
+    },
+
+    randomId (n) {
+      let res = ''
+      for (let i = 0; i < n; i++) {
+        const id = Math.ceil(Math.random() * 35)
+        res += Config.randomChars[id]
+      }
+      return res
+    },
+    confirm () {
+      const _obj = {
+        selfId: this.selfId,
+        type: this.condition_handle.type,
+        options: {
+          words: this.words_handle.replace(/，/g, ',').split(',')
+        },
+        conditionId: this.conditionId
+      }
+      this.updateById(_obj)
+      // this.$emit('updateCondition', _obj);
+    },
+    addFather (logic) {
+      const _obj = {
+        conditionId: this.conditionId,
+        logic: logic,
+        selfId: this.selfId
+      }
+      this.addFatherById(_obj)
+    },
+    addBrother () {
+      const _obj = {
+        conditionId: this.conditionId,
+        selfId: this.selfId
+      }
+      this.addBrotherById(_obj)
+    },
+    removeNode () {
+      const _obj = {
+        selfId: this.selfId,
+        parentId: this.parentId,
+        conditionId: this.conditionId
+      }
+      this.removeById(_obj)
+    }
+  },
+  mounted: function () {
+
+  },
+  watch: {
+    //      'condition_handle': {
+    //        handler: function(newC, oldC) {
+    //          debugger
+    //          this.words_handle = newC.options? this.arrayToString(newC.options.words): '';
+    //        },
+    //        deep: true
+    //      },
+    condition: {
+      handler: function (newC, oldC) {
+        for (const i in this.condition_handle) {
+          delete this.condition_handle[i]
+        }
+        for (const ii in newC) {
+          this.$set(this.condition_handle, ii, newC[ii])
+        }
+        // this.$set(this,'words_handle',newC.options? this.arrayToString(newC.options.words): '');
+        this.words_handle = this.condition_handle.options ? this.arrayToString(this.condition_handle.options.words) : ''
+        // this.$forceUpdate();
+        debugger
+      },
+      deep: true
+    }
+    //      'condition.options': {
+    //        handler: function(newC, oldC) {
+    //          debugger
+    //          console.log(newC);
+    //        },
+    //        deep: true
+    //      },
+    //      'condition.id': {
+    //        handler: function(newC, oldC) {
+    //          debugger
+    //          console.log(newC);
+    //        },
+    //        deep: true
+    //      },
+    //      'condition.parentId': {
+    //        handler: function(newC, oldC) {
+    //          debugger
+    //          console.log(newC);
+    //        },
+    //        deep: true
+    //      }
   }
+}
 </script>

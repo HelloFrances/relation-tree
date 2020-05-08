@@ -22,10 +22,10 @@
 </style>
 
 <script>
-  export default {
-    name: 'Demo',
-    data() {
-      return {};
-    }
-  };
+export default {
+  name: 'Demo',
+  data () {
+    return {}
+  }
+}
 </script>
